@@ -1,6 +1,7 @@
 package com.aej.ojekkuapi.utils
 
 import com.aej.ojekkuapi.exception.OjekuException
+import com.aej.ojekkuapi.location.entity.Coordinate
 
 inline fun <reified T> T?.orThrow(
     message: String = "${T::class.simpleName} is null"
@@ -24,4 +25,11 @@ fun <T> Result<T>.toResponse(): BaseResponse<T> {
     } else {
         BaseResponse.success(this.getOrNull())
     }
+}
+
+fun String.coordinateStringToData(): Coordinate {
+    val coordinateStrings = split(",")
+    val lat = coordinateStrings[0].toDoubleOrNull() ?: 0.0
+    val lng = coordinateStrings[1].toDoubleOrNull() ?: 0.0
+    return Coordinate(lat, lng)
 }
