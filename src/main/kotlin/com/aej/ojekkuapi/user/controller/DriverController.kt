@@ -3,7 +3,7 @@ package com.aej.ojekkuapi.user.controller
 import com.aej.ojekkuapi.user.entity.LoginResponse
 import com.aej.ojekkuapi.user.entity.User
 import com.aej.ojekkuapi.user.entity.UserLogin
-import com.aej.ojekkuapi.user.entity.UserRequest
+import com.aej.ojekkuapi.user.entity.request.DriverRegisterRequest
 import com.aej.ojekkuapi.user.services.UserServices
 import com.aej.ojekkuapi.utils.BaseResponse
 import com.aej.ojekkuapi.utils.toResponse
@@ -33,8 +33,9 @@ class DriverController {
 
     @PostMapping("/register")
     fun register(
-        @RequestBody userRequest: UserRequest
+        @RequestBody userRequest: DriverRegisterRequest
     ): BaseResponse<Boolean> {
-        return userServices.register(userRequest.mapToNewDriver()).toResponse()
+        val user = userRequest.mapToUser()
+        return userServices.register(user).toResponse()
     }
 }

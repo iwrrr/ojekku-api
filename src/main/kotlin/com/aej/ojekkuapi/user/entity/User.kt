@@ -1,84 +1,38 @@
 package com.aej.ojekkuapi.user.entity
 
-import com.aej.ojekkuapi.utils.Role
+import com.aej.ojekkuapi.user.entity.extra.DriverExtras
+import com.aej.ojekkuapi.user.entity.extra.emptyExtra
 import java.util.*
 
 data class User(
     var id: String = "",
     var username: String = "",
-    var email: String = "",
-    var password: String = "",
-    var firstName: String = "",
-    var lastName: String = "",
-    var address: String = "",
-    var phoneNumber: String = "",
-    var role: Int = 0,
+    var password: String? = "",
+    var role: Role = Role.CUSTOMER,
+    var extra: Any = emptyExtra()
 ) {
 
     companion object {
-        fun createNewUser(
-            username: String,
-            email: String,
-            password: String,
-            firstName: String,
-            lastName: String,
-            address: String,
-            phoneNumber: String,
-        ): User {
+        fun createNewDriver(username: String, password: String, extra: DriverExtras): User {
             return User(
                 id = UUID.randomUUID().toString(),
                 username = username,
-                email = email,
                 password = password,
-                firstName = firstName,
-                lastName = lastName,
-                address = address,
-                phoneNumber = phoneNumber
+                role = Role.DRIVER,
+                extra = extra
             )
         }
 
-        fun createNewCustomer(
-            username: String,
-            email: String,
-            password: String,
-            firstName: String,
-            lastName: String,
-            address: String,
-            phoneNumber: String,
-        ): User {
+        fun createNewCustomer(username: String, password: String): User {
             return User(
                 id = UUID.randomUUID().toString(),
                 username = username,
-                email = email,
                 password = password,
-                firstName = firstName,
-                lastName = lastName,
-                address = address,
-                phoneNumber = phoneNumber,
-                role = Role.CUSTOMER.id
+                role = Role.CUSTOMER
             )
         }
-
-        fun createNewDriver(
-            username: String,
-            email: String,
-            password: String,
-            firstName: String,
-            lastName: String,
-            address: String,
-            phoneNumber: String,
-        ): User {
-            return User(
-                id = UUID.randomUUID().toString(),
-                username = username,
-                email = email,
-                password = password,
-                firstName = firstName,
-                lastName = lastName,
-                address = address,
-                phoneNumber = phoneNumber,
-                role = Role.DRIVER.id
-            )
-        }
+    }
+    enum class Role {
+        CUSTOMER, DRIVER
     }
 }

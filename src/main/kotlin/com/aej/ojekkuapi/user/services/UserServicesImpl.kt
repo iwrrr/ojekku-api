@@ -35,14 +35,14 @@ class UserServicesImpl(
 
     override fun getUserByUserId(id: String): Result<User> {
         return userRepository.getUserById(id).map {
-            it.password = "null"
+            it.password = null
             it
         }
     }
 
     override fun getUserByUsername(username: String): Result<User> {
         return userRepository.getUserByUsername(username).map {
-            it.password = "null"
+            it.password = null
             it
         }
     }

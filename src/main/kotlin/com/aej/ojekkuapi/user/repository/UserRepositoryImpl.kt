@@ -2,8 +2,11 @@ package com.aej.ojekkuapi.user.repository
 
 import com.aej.ojekkuapi.database.DatabaseComponent
 import com.aej.ojekkuapi.exception.OjekuException
-import com.aej.ojekkuapi.utils.toResult
 import com.aej.ojekkuapi.user.entity.User
+import com.aej.ojekkuapi.user.entity.extra.CustomerExtras
+import com.aej.ojekkuapi.user.entity.extra.DriverExtras
+import com.aej.ojekkuapi.utils.safeClassTo
+import com.aej.ojekkuapi.utils.toResult
 import com.mongodb.client.MongoCollection
 import org.litote.kmongo.eq
 import org.litote.kmongo.findOne
@@ -31,7 +34,14 @@ class UserRepositoryImpl(
     }
 
     override fun getUserById(id: String): Result<User> {
-        return getCollection().findOne(User::id eq id).toResult()
+        return getCollection().findOne(User::id eq id).run {
+            if (this?.role == User.Role.DRIVER) {
+                this.extra.safeClassTo(DriverExtras::class.java)
+            } else {
+                this?.extra?.safeClassTo(CustomerExtras::class.java)
+            }
+            this
+        }.toResult()
     }
 
     override fun getUserByUsername(username: String): Result<User> {

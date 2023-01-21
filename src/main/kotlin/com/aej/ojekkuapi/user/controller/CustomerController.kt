@@ -3,7 +3,7 @@ package com.aej.ojekkuapi.user.controller
 import com.aej.ojekkuapi.user.entity.LoginResponse
 import com.aej.ojekkuapi.user.entity.User
 import com.aej.ojekkuapi.user.entity.UserLogin
-import com.aej.ojekkuapi.user.entity.UserRequest
+import com.aej.ojekkuapi.user.entity.request.CustomerRegisterRequest
 import com.aej.ojekkuapi.user.services.UserServices
 import com.aej.ojekkuapi.utils.BaseResponse
 import com.aej.ojekkuapi.utils.toResponse
@@ -33,8 +33,9 @@ class CustomerController {
 
     @PostMapping("/register")
     fun register(
-        @RequestBody userRequest: UserRequest
+        @RequestBody userRequest: CustomerRegisterRequest
     ): BaseResponse<Boolean> {
-        return userServices.register(userRequest.mapToNewCustomer()).toResponse()
+        val user = userRequest.mapToUser()
+        return userServices.register(user).toResponse()
     }
 }
