@@ -5,7 +5,7 @@ import com.aej.ojekkuapi.location.mapper.Mapper
 import com.aej.ojekkuapi.location.entity.Coordinate
 import com.aej.ojekkuapi.location.entity.Location
 import com.aej.ojekkuapi.location.entity.Routes
-import com.aej.ojekkuapi.utils.orThrow
+import com.aej.ojekkuapi.utils.extensions.orThrow
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 

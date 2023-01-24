@@ -11,5 +11,6 @@ class DatabaseComponent {
 
     companion object {
         private const val DATABASE_URL = "mongodb+srv://aej:1234@cluster0.68kdwrd.mongodb.net/?retryWrites=true&w=majority"
+        const val DATABASE_NAME = "ojekku"
     }
 }

@@ -1,7 +1,9 @@
-package com.aej.ojekkuapi.utils
+package com.aej.ojekkuapi.utils.extensions
 
 import com.aej.ojekkuapi.exception.OjekuException
 import com.aej.ojekkuapi.location.entity.Coordinate
+import com.aej.ojekkuapi.utils.BaseResponse
+import org.springframework.security.core.context.SecurityContextHolder
 
 inline fun <reified T> T?.orThrow(
     message: String = "${T::class.simpleName} is null"
@@ -33,3 +35,5 @@ fun String.coordinateStringToData(): Coordinate {
     val lng = coordinateStrings[1].toDoubleOrNull() ?: 0.0
     return Coordinate(lat, lng)
 }
+
+fun Any.findUserId(): String? = SecurityContextHolder.getContext().authentication.principal as? String

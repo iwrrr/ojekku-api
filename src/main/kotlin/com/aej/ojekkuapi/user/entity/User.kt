@@ -1,5 +1,6 @@
 package com.aej.ojekkuapi.user.entity
 
+import com.aej.ojekkuapi.location.entity.Coordinate
 import com.aej.ojekkuapi.user.entity.extra.DriverExtras
 import com.aej.ojekkuapi.user.entity.extra.emptyExtra
 import java.util.*
@@ -9,7 +10,8 @@ data class User(
     var username: String = "",
     var password: String? = "",
     var role: Role = Role.CUSTOMER,
-    var extra: Any = emptyExtra()
+    var extra: Any = emptyExtra(),
+    var coordinate: Coordinate = Coordinate()
 ) {
 
     companion object {
@@ -32,6 +34,7 @@ data class User(
             )
         }
     }
+
     enum class Role {
         CUSTOMER, DRIVER
     }

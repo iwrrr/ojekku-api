@@ -5,7 +5,7 @@ import com.aej.ojekkuapi.user.entity.User
 import com.aej.ojekkuapi.user.entity.UserLogin
 import com.aej.ojekkuapi.user.services.UserServices
 import com.aej.ojekkuapi.utils.BaseResponse
-import com.aej.ojekkuapi.utils.toResponse
+import com.aej.ojekkuapi.utils.extensions.toResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*

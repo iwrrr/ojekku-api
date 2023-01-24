@@ -4,8 +4,8 @@ import com.aej.ojekkuapi.location.entity.Location
 import com.aej.ojekkuapi.location.entity.Routes
 import com.aej.ojekkuapi.location.services.LocationServices
 import com.aej.ojekkuapi.utils.BaseResponse
-import com.aej.ojekkuapi.utils.coordinateStringToData
-import com.aej.ojekkuapi.utils.toResponse
+import com.aej.ojekkuapi.utils.extensions.coordinateStringToData
+import com.aej.ojekkuapi.utils.extensions.toResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping

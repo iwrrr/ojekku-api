@@ -1,4 +1,4 @@
-package com.aej.ojekkuapi.utils
+package com.aej.ojekkuapi.utils.extensions
 
 import com.fasterxml.jackson.databind.ObjectMapper
 

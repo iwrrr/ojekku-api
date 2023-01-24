@@ -5,8 +5,11 @@ import com.aej.ojekkuapi.exception.OjekuException
 import com.aej.ojekkuapi.user.entity.User
 import com.aej.ojekkuapi.user.entity.extra.CustomerExtras
 import com.aej.ojekkuapi.user.entity.extra.DriverExtras
-import com.aej.ojekkuapi.utils.safeClassTo
-import com.aej.ojekkuapi.utils.toResult
+import com.aej.ojekkuapi.utils.DataQuery
+import com.aej.ojekkuapi.utils.extensions.collection
+import com.aej.ojekkuapi.utils.extensions.combineUpdate
+import com.aej.ojekkuapi.utils.extensions.safeClassTo
+import com.aej.ojekkuapi.utils.extensions.toResult
 import com.mongodb.client.MongoCollection
 import org.litote.kmongo.eq
 import org.litote.kmongo.findOne
@@ -46,5 +49,16 @@ class UserRepositoryImpl(
 
     override fun getUserByUsername(username: String): Result<User> {
         return getCollection().findOne(User::username eq username).toResult("User not found!")
+    }
+
+    override fun <T> update(id: String, vararg updater: DataQuery<User, T>): Result<Boolean> {
+        val fields = updater.toList().combineUpdate()
+        return databaseComponent.collection<User>()
+            .updateOne(
+                User::id eq id,
+                fields
+            )
+            .wasAcknowledged()
+            .toResult()
     }
 }

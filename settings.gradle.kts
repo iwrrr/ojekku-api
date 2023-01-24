@@ -1,1 +1,1 @@
-rootProject.name = "ojekku-api"
+rootProject.name = "ojeku-api"

@@ -29,22 +29,24 @@ class JwtConfig : WebSecurityConfigurerAdapter() {
         http.sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
-            .csrf().disable()
+            .csrf()
+            .disable()
             .addFilterAt(authenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
             .authorizeRequests()
             .antMatchers(HttpMethod.POST, *postPermit.toTypedArray()).permitAll()
             .antMatchers(HttpMethod.GET, *getPermit.toTypedArray()).permitAll()
-            .anyRequest().authenticated()
+            .anyRequest()
+            .authenticated()
     }
 
     companion object {
+        const val HEADER_KEY_AUTHORIZATION = "Authorization"
+        const val HEADER_KEY_COORDINATE = "Coordinate"
+
         val postPermit = listOf(
             "/api/v1/user/login",
-            "/api/v1/user/register",
-            "/api/v1/customer/login",
-            "/api/v1/customer/register",
-            "/api/v1/driver/login",
-            "/api/v1/driver/register",
+            "/api/v1/user/customer/register",
+            "/api/v1/user/driver/register",
         )
 
         val getPermit = listOf(
